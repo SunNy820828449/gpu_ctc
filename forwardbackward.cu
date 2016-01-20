@@ -100,7 +100,7 @@ __global__ void gpu_forward_backward(float *Output, float *Forward, float *Backw
 			__syncthreads();
 		}
 	}
-	else if (ti < l_l)//后向算法
+	else if (ti < l_l)//backward
 	{
 		//mark compute the no blank and no repet
 		if (ti < l_l - 2 && label != Lable[st + ti + 2])
@@ -133,7 +133,7 @@ __global__ void gpu_forward_backward(float *Output, float *Forward, float *Backw
 				pr[ti] = logf(pr[ti]);
 			__syncthreads();
 
-			if (ti > 2 * t + 1)//同样斜率是2 
+			if (ti > 2 * t + 1)
 				cur = MIN;
 			else
 			{
